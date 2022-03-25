@@ -1,0 +1,17 @@
+{
+  "name": "hai",
+  "description": "my first demo app",
+  "main": "index.js",
+  "authors": [
+    "haipham"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/phamhaibkit/Nodejs",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
