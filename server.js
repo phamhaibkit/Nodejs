@@ -1,23 +1,22 @@
-const express = require('express');
-const app = express();
- 
-app.get('/', (req, res) => {
-  res
-    .status(200)
-    .send('Hello server is running')
-    .end();
-});
+const express = require('express')
+const mongoose = require('mongoose')
+const app = express()
 
-app.get('/test', (req, res) => {
-  res
-    .status(200)
-    .send('Test is work!')
-    .end();
-});
- 
-// Start the server
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-  console.log('Press Ctrl+C to quit.');
-});
+const products_routes = require('./routes/products.js')
+const users_routes = require('./routes/users')
+
+require('dotenv').config()
+
+mongoose.connect(process.env.MONGO_URI)
+    .then((result) => app.listen(5000))
+    .catch((err) => console.log(Error))
+
+app.use(express.json())
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Welcome to My Project',
+  });
+})
+
+app.use('/api/products', products_routes)
+app.use('/api/users', users_routes)
