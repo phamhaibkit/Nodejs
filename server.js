@@ -8,15 +8,20 @@ const users_routes = require('./routes/users')
 require('dotenv').config()
 
 mongoose.connect(process.env.MONGO_URI)
-    .then((result) => app.listen(process.env.PORT || 5000))
+    .then((result) => {console.log('Ajijijij');app.listen(process.env.PORT || 5000)})
     .catch((err) => console.log(Error))
 
-app.use(express.json())
 app.get('/', (req, res) => {
   res.status(200).json({
     message: 'Welcome to My Project',
   });
 })
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use('/api/products', products_routes)
 app.use('/api/users', users_routes)
