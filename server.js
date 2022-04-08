@@ -1,11 +1,18 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const app = express()
 
 const products_routes = require('./routes/products.js')
 const users_routes = require('./routes/users')
 
 require('dotenv').config()
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 mongoose.connect(process.env.MONGO_URI)
     .then((result) => {console.log('Ajijijij');app.listen(process.env.PORT || 5000)})
