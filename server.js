@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+var cors = require('cors')
 const app = express()
 
 const products_routes = require('./routes/products.js')
@@ -10,6 +11,9 @@ require('dotenv').config()
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cors({
+  origin: true
+}))
 
 // parse application/json
 app.use(bodyParser.json())
